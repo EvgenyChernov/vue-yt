@@ -23,7 +23,7 @@
         <button @click="addNewNote" class="btn">Добавить</button>
     </div>
     <div class="overflow-x-auto">
-        <table class="table">
+        <table v-if="notes.length !== 0" class="table">
             <!-- head -->
             <thead>
             <tr>
@@ -41,6 +41,8 @@
                 </td>
             </tr>
             </tbody>
+        </table>
+        <h2 v-else>Заметок нет</h2>
     </div>
 
 </div>
