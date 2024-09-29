@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css"/>
+    <title>Title</title>
+</head>
+
+<body>
+<div id="app" class="container p-5">
+    <div class="w-min flex p-3 gap-x-3">
+        <h1 class="whitespace-nowrap">{{ title }}: {{ count }}</h1>
+        <button @click="count++" class="btn" >+</button>
+        <button class="btn btn-warning" @click="count--">-</button>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
