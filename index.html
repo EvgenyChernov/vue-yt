@@ -14,10 +14,9 @@
         <h1 class="whitespace-nowrap">{{ title }}</h1>
         <input
                 type="text"
-                v-bind:placeholder="placeholderString"
-                :value="inputValue"
+                :placeholder="placeholderString"
+                v-model="inputValue"
                 class="input input-bordered w-full max-w-xs"
-                @input="inputChangeHandler"
                 @keyup.enter="addNewNote"
         />
         <button @click="addNewNote" class="btn">Добавить</button>
