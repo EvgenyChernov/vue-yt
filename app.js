@@ -24,14 +24,20 @@ createApp({
             return item.toUpperCase()
         },
         deleteNote(index, event) {
-            console.log(event)
             this.notes.splice(index, 1)
         },
     },
     computed: {
         doubleCountComp() {
-            console.log('doubleCountComp')
             return this.notes.length * 2
+        }
+    },
+    watch: {
+        // валидация импровезированная
+        inputValue(value) {
+            if (value.length > 10) {
+                this.inputValue = ''
+            }
         }
     }
 }).mount('#app')
