@@ -19,9 +19,26 @@
                 class="input input-bordered w-full max-w-xs"
                 @input="inputChangeHandler"
         />
-        <button class="btn">Добавить</button>
-        <h2>{{inputValue}}</h2>
+        <button @click="addNewNote" class="btn">Добавить</button>
     </div>
+    <div class="overflow-x-auto">
+        <table class="table">
+            <!-- head -->
+            <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr v-for="(item, index) in notes">
+                <th>{{ index + 1 }}</th>
+                <td>{{ item }}</td>
+            </tr>
+            </tbody>
+    </div>
+
 </div>
 
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

@@ -5,14 +5,19 @@ createApp({
         return {
             title: 'Список заметок',
             placeholderString: 'Введите название заметки',
-            inputValue: ''
+            inputValue: '',
+            notes: ['Заметка 1', 'Заметка 2']
 
         }
     },
     methods: {
         inputChangeHandler(event) {
-            console.log('inputChangeHandler', event.target.value)
             this.inputValue = event.target.value
+        },
+        addNewNote() {
+            this.notes.push(this.inputValue)
+            this.inputValue = ''
         }
+
     }
 }).mount('#app')
