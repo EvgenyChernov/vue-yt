@@ -17,6 +17,10 @@ createApp({
         addNewNote() {
             this.notes.push(this.inputValue)
             this.inputValue = ''
+        },
+        deleteNote(index, event) {
+            console.log(event)
+            this.notes.splice(index, 1)
         }
 
     }
