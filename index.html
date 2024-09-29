@@ -10,10 +10,17 @@
 
 <body>
 <div id="app" class="container p-5">
-    <div class="w-min flex p-3 gap-x-3">
-        <h1 class="whitespace-nowrap">{{ title }}: {{ count }}</h1>
-        <button @click="count++" class="btn" >+</button>
-        <button class="btn btn-warning" @click="count--">-</button>
+    <div class=" p-3 gap-3 flex flex-col">
+        <h1 class="whitespace-nowrap">{{ title }}</h1>
+        <input
+                type="text"
+                v-bind:placeholder="placeholderString"
+                :value="inputValue"
+                class="input input-bordered w-full max-w-xs"
+                @input="inputChangeHandler"
+        />
+        <button class="btn">Добавить</button>
+        <h2>{{inputValue}}</h2>
     </div>
 </div>
 
