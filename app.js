@@ -26,7 +26,16 @@ createApp({
         deleteNote(index, event) {
             console.log(event)
             this.notes.splice(index, 1)
+        },
+        doubleCount(count) {
+            console.log('doubleCount', count)
+            return count * 2
         }
-
+    },
+    computed: {
+        doubleCountComp() {
+            console.log('doubleCountComp')
+            return this.notes.length * 2
+        }
     }
 }).mount('#app')
