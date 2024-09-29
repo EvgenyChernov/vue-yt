@@ -18,6 +18,7 @@
                 :value="inputValue"
                 class="input input-bordered w-full max-w-xs"
                 @input="inputChangeHandler"
+                @keyup.enter="addNewNote"
         />
         <button @click="addNewNote" class="btn">Добавить</button>
     </div>
