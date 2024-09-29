@@ -35,7 +35,7 @@
             <tbody>
             <tr v-for="(item, index) in notes">
                 <th>{{ index + 1 }}</th>
-                <td>{{ item }}</td>
+                <td>{{ toUpperCase(item) }}</td>
                 <td>
                     <button @click="deleteNote(index, $event)" class="btn btn-error">X</button>
                 </td>

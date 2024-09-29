@@ -15,8 +15,13 @@ createApp({
             this.inputValue = event.target.value
         },
         addNewNote() {
-            this.notes.push(this.inputValue)
-            this.inputValue = ''
+            if (this.inputValue !== '') {
+                this.notes.push(this.inputValue)
+                this.inputValue = ''
+            }
+        },
+        toUpperCase(item) {
+            return item.toUpperCase()
         },
         deleteNote(index, event) {
             console.log(event)
