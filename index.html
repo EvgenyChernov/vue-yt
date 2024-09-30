@@ -6,52 +6,40 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css"/>
     <title>Title</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
-<div id="app" class="container p-5">
-    <div class=" p-3 gap-3 flex flex-col">
-        <h1
-                :style="{
-        color: inputValue.length < 5 ? 'red': 'green',
-        fontSize: inputValue.length < 5 ? '1rem': '2rem'
-        }"
-                :class="notes.length > 5? 'font-bold': 'font-extralight'
+<div id="app" class="container p-5" v-cloak>
+    <!--    <div v-html="myHtml" class=""></div>-->
+    <!--    <div v-text="title" class=""></div>-->
+    <!--    <div v-once class="">{{title}}</div>-->
+    <!--    <button class="btn" @click="title = ''"></button>-->
+    <!--    <h2 v-pre>{{ title }}</h2>-->
+    <!--    <br>-->
+    <!--    <br>-->
+    <!--    <br>-->
+    <!--    <br>-->
+    <!--    <ul>-->
+    <!--        <li v-for="item in 7 " class="list-item">{{item}}</li>-->
+    <!--    </ul>-->
+    <div v-show="items.length" class="">
 
-">{{ title }}</h1>
-        <input
-                type="text"
-                :placeholder="placeholderString"
-                v-model="inputValue"
-                :class="{'input w-full max-w-xs': true, 'input-bordered': inputValue.length > 4}"
-                @keyup.enter="addNewNote"
-        />
-        <button @click="addNewNote" :class="['btn', {'btn-accent': inputValue.length < 5 }]">Добавить</button>
+        <ul>
+            <li v-for="(item, key, index) in user " class="list-item">{{key + ' ' + item + ' ' + index}}</li>
+        </ul>
+        <ul>
+            <li @click="this.items.splice(index, 1)" v-for="(item, index) in evenItems"  :key="item" class="list-item flex w-full p-3">
+                <span class="p-4">{{ item }}</span>
+                <input @click.stop type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+            </li>
+        </ul>
     </div>
-    <div class="overflow-x-auto">
-        <table v-if="notes.length !== 0" class="table">
-            <!-- head -->
-            <thead>
-            <tr>
-                <th></th>
-                <th>Name</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="(item, index) in notes">
-                <th>{{ index + 1 }}</th>
-                <td>{{ toUpperCase(item) }}</td>
-                <td>
-                    <button @click="deleteNote(index, $event)" class="btn btn-error">X</button>
-                </td>
-            </tr>
-            </tbody>
-            <strong>Общее количество: {{ notes.length }}</strong> удовоенное число: {{ doubleCountComp }}
-        </table>
-        <h2 v-else>Заметок нет</h2>
-    </div>
-
+    <div v-show="!items.length" >список пуст</div>
 </div>
 
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

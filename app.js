@@ -1,40 +1,18 @@
-const {createApp} = Vue
-
-createApp({
-    data() {
-        return {
-            title: 'Список заметок',
-            placeholderString: 'Введите название заметки',
-            inputValue: '',
-            notes: ['Заметка 1', 'Заметка 2']
-
-        }
-    },
-    methods: {
-        addNewNote() {
-            if (this.inputValue !== '') {
-                this.notes.push(this.inputValue)
-                this.inputValue = ''
-            }
+Vue.createApp({
+    data: () => ({
+        myHtml: '<h1>vue 3 app </h1>',
+        title: 'Vue Youtube',
+        user: {
+            name: 'evgen',
+            email: 'evgen@gmail.com',
+            password: 'evgen@gmail.com',
+            age: '23'
         },
-        toUpperCase(item) {
-            return item.toUpperCase()
-        },
-        deleteNote(index, event) {
-            this.notes.splice(index, 1)
-        },
-    },
+        items: [1, 2, 3, 4, 5, 6],
+    }),
     computed: {
-        doubleCountComp() {
-            return this.notes.length * 2
-        }
-    },
-    watch: {
-        // валидация импровезированная
-        inputValue(value) {
-            if (value.length > 10) {
-                this.inputValue = ''
-            }
+        evenItems() {
+            return this.items.filter(i => i %2 === 0);
         }
     }
 }).mount('#app')
