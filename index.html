@@ -6,41 +6,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css"/>
     <title>Title</title>
-    <style>
-        [v-cloak] {
-            display: none;
-        }
-    </style>
 </head>
 
 <body>
-<div id="app" class="container p-5" v-cloak>
-    <!--    <div v-html="myHtml" class=""></div>-->
-    <!--    <div v-text="title" class=""></div>-->
-    <!--    <div v-once class="">{{title}}</div>-->
-    <!--    <button class="btn" @click="title = ''"></button>-->
-    <!--    <h2 v-pre>{{ title }}</h2>-->
-    <!--    <br>-->
-    <!--    <br>-->
-    <!--    <br>-->
-    <!--    <br>-->
-    <!--    <ul>-->
-    <!--        <li v-for="item in 7 " class="list-item">{{item}}</li>-->
-    <!--    </ul>-->
-    <div v-show="items.length" class="">
+<div id="app" class="container p-5">
 
-        <ul>
-            <li v-for="(item, key, index) in user " class="list-item">{{key + ' ' + item + ' ' + index}}</li>
-        </ul>
-        <ul>
-            <li @click.right.prevent="remove(index), log($event)" v-for="(item, index) in items"  :key="item" class="list-item flex w-full p-3">
-                <span class="p-4">{{ item }}</span>
-                <input @click.stop type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-            </li>
-        </ul>
-    </div>
-    <div v-show="!items.length" >список пуст</div>
-    <input @keyup.enter="addItem($event)" type="text" placeholder="Type here" class="input w-full max-w-xs" ref="myInput" />
 </div>
 
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
