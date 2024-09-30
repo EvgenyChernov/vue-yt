@@ -11,18 +11,22 @@
 <body>
 <div id="app" class="container p-5">
     <div class=" p-3 gap-3 flex flex-col">
-        <h1 :style="{
+        <h1
+                :style="{
         color: inputValue.length < 5 ? 'red': 'green',
-        fontSize:inputValue.length < 5 ? '1rem': '2rem'
-        }" class="whitespace-nowrap">{{ title }}</h1>
+        fontSize: inputValue.length < 5 ? '1rem': '2rem'
+        }"
+                :class="notes.length > 5? 'font-bold': 'font-extralight'
+
+">{{ title }}</h1>
         <input
                 type="text"
                 :placeholder="placeholderString"
                 v-model="inputValue"
-                class="input input-bordered w-full max-w-xs"
+                :class="{'input w-full max-w-xs': true, 'input-bordered': inputValue.length > 4}"
                 @keyup.enter="addNewNote"
         />
-        <button @click="addNewNote" class="btn">Добавить</button>
+        <button @click="addNewNote" :class="['btn', {'btn-accent': inputValue.length < 5 }]">Добавить</button>
     </div>
     <div class="overflow-x-auto">
         <table v-if="notes.length !== 0" class="table">
