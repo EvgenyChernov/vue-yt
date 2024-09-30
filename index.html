@@ -33,13 +33,14 @@
             <li v-for="(item, key, index) in user " class="list-item">{{key + ' ' + item + ' ' + index}}</li>
         </ul>
         <ul>
-            <li @click="this.items.splice(index, 1)" v-for="(item, index) in evenItems"  :key="item" class="list-item flex w-full p-3">
+            <li @click.right.prevent="remove(index), log($event)" v-for="(item, index) in items"  :key="item" class="list-item flex w-full p-3">
                 <span class="p-4">{{ item }}</span>
                 <input @click.stop type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
             </li>
         </ul>
     </div>
     <div v-show="!items.length" >список пуст</div>
+    <input @keyup.enter="addItem($event)" type="text" placeholder="Type here" class="input w-full max-w-xs" ref="myInput" />
 </div>
 
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
