@@ -96,3 +96,11 @@ const proxy = new Proxy(data, {
 })
 proxy.title = 'Angular 10'
 // console.log(proxy)
+
+Vue.createApp({
+    data(){
+        return {
+            title: 'Новый тайтл',
+        }
+    }
+}).mount('#app2')
