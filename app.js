@@ -32,11 +32,41 @@ const app = Vue.createApp({
                 onclick: this.changeTitle
             }, 'Изменить')
         )
+    },
+    beforeCreate() {
+        console.log('beforeCreate')
+    },
+    created () {
+        console.log('created')
+    },
+    beforeMount (){
+        console.log('beforeMount')
+    },
+    mounted () {
+        console.log('mounted')
+    },
+    beforeUnmount (){
+        console.log('beforeUnmount')
+    },
+    unmounted () {
+        console.log('unmount')
+    },
+    beforeUpdate () {
+        console.log('beforeUpdate')
+    },
+    updated () {
+        console.log('updated')
     }
 })
 
 
 app.mount('#app')
+
+// setTimeout(() => {
+//     app.unmount()
+// }, 2000)
+
+
 
 let title = 'Vue 3'
 let message = 'Заголовок это ' + title
@@ -65,4 +95,4 @@ const proxy = new Proxy(data, {
     }
 })
 proxy.title = 'Angular 10'
-console.log(proxy)
+// console.log(proxy)
