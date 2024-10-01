@@ -1,106 +1,52 @@
-const h = Vue.h
+const {createApp} = Vue
 
-const app = Vue.createApp({
+createApp({
     data() {
         return {
-            title: 'это title'
+            complete : false,
+            activeStep: 1,
+            steps: [
+                {
+                    number: 1,
+                    name: 'Основы',
+                    body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam architecto aut autem beatae consectetur cum cumque est facilis laborum minima, molestias, necessitatibus nihil quia tenetur?'
+                },
+                {
+                    number: 2,
+                    name: 'Компоненнты',
+                    body: 'Описание второго шага. Продолжение Lorem ipsum dolor sit amet.'
+                },
+                {
+                    number: 3,
+                    name: 'Роутер',
+                    body: 'Описание третьего шага. Продолжение Lorem ipsum dolor sit amet.'
+                },
+                {
+                    number: 4,
+                    name: 'Vuex',
+                    body: 'Описание четвертого шага. Продолжение Lorem ipsum dolor sit amet.'
+                },
+                {
+                    number: 5,
+                    name: 'Composition',
+                    body: 'Описание пятого шага. Продолжение Lorem ipsum dolor sit amet.'
+                }
+            ]
         }
     },
-    // template: `
-    // <div>
-    //        <h1>Вывод из темплейта</h1>
-    //        <h1>{{ title }}</h1>
-    //        <button @click="title = 'новый title'" class="btn">изменить</button>
-    // </div>
-    // `,
     methods: {
-        changeTitle() {
-            console.log(this)
-            this.title = 'новый тайтл'
-        }
-    },
-    render() {
-        return h('div', {
-                class: 'card center'
-            },
-            h('ul', null, [
-                h('li', null,  this.title ),
-                h('li', null, 'это Li2')
-            ]),
-            h('button', {
-                class: 'btn error',
-                onclick: this.changeTitle
-            }, 'Изменить')
-        )
-    },
-    beforeCreate() {
-        console.log('beforeCreate')
-    },
-    created () {
-        console.log('created')
-    },
-    beforeMount (){
-        console.log('beforeMount')
-    },
-    mounted () {
-        console.log('mounted')
-    },
-    beforeUnmount (){
-        console.log('beforeUnmount')
-    },
-    unmounted () {
-        console.log('unmount')
-    },
-    beforeUpdate () {
-        console.log('beforeUpdate')
-    },
-    updated () {
-        console.log('updated')
-    }
-})
-
-
-app.mount('#app')
-
-// setTimeout(() => {
-//     app.unmount()
-// }, 2000)
-
-
-
-let title = 'Vue 3'
-let message = 'Заголовок это ' + title
-// console.log(message)
-// title = 'Angular 10'
-// console.log(message)
-const data = {
-     title : 'Vue 3',
-     message : 'Заголовок это '
-}
-
-const proxy = new Proxy(data, {
-    // get(target, key) {
-    //     console.log(target)
-    //     console.log(key)
-    // },
-    set(target, key, value) {
-        if (key === 'title') {
-            target.message = 'Заголовок это ' +  value
-        }
-        target[key] = value
-
-        // console.log(target)
-        // console.log(key)
-        // console.log(value)
-    }
-})
-proxy.title = 'Angular 10'
-// console.log(proxy)
-
-Vue.createApp({
-    data(){
-        return {
-            title: 'Новый тайтл',
+        doStep(nextStep) {
+            this.activeStep = nextStep
+        },
+        doNextStep() {
+            if (this.activeStep < 5) {
+                this.activeStep = this.activeStep + 1
+            }
+        },
+        doPrevStep() {
+            if (this.activeStep > 1) {
+                this.activeStep = this.activeStep - 1
+            }
         }
     }
-}).mount('#app2')
+}).mount('#app')
