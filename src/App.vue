@@ -6,9 +6,26 @@ export default {
     return {
       now: new Date().toLocaleDateString(),
       news: [
-        'Какая то новость',
-        'Какая то новость2'
+        {
+          title: 'Какая то новость',
+          id: 1,
+          isOpen: false
+        }, {
+          title: 'Какая то новость2',
+          id: 2,
+          isOpen: false
+        }
       ]
+    }
+  },
+  methods: {
+    toggleOpen (id) {
+      this.news = this.news.map(item => {
+        if (item.id === id) {
+          item.isOpen = !item.isOpen
+        }
+        return item
+      })
     }
   },
   components: {
@@ -21,11 +38,13 @@ export default {
   <div class="container pt-1">
     <div class="card ">
       <h2>Актуальные новости на {{ now }}</h2>
-      <app-news></app-news>
       <app-news
           v-for="item in news"
-          :key="item"
-          :title="item"
+          :key="item.id"
+          :title="item.title"
+          :id="item.id"
+          :is-open="item.isOpen"
+          @toggle="toggleOpen(item.id)"
       ></app-news>
     </div>
   </div>
