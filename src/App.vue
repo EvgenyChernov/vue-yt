@@ -72,6 +72,12 @@ export default {
       })
     }
   },
+  provide () {
+    return {
+      title: 'Список всех новостей',
+      news: this.news
+    }
+  },
   components: {
     AppNews
   }

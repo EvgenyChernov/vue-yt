@@ -9,6 +9,7 @@
         totam?</p>
       <app-button v-if="!wasRead" @action="toRedNews">Прочесть новость</app-button>
       <app-button color="btn-warning" v-if="wasRead" @action="notReadNews">Отметить непрочитанной</app-button>
+      <app-new-list></app-new-list>
     </div>
 
   </div>
@@ -16,9 +17,10 @@
 
 <script>
 import AppButton from '@/AppButton.vue'
+import AppNewList from '@/AppNewList.vue'
 
 export default {
-  components: { AppButton },
+  components: { AppButton, AppNewList },
   // props: [
   //   'title'
   // ],
