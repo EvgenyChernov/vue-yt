@@ -4,6 +4,7 @@ import AppNews from '@/AppNews.vue'
 export default {
   data () {
     return {
+      openRate: 0,
       now: new Date().toLocaleDateString(),
       news: [
         {
@@ -38,6 +39,7 @@ export default {
   <div class="container pt-1">
     <div class="card ">
       <h2>Актуальные новости на {{ now }}</h2>
+      <p>открыли {{openRate}}</p>
       <app-news
           v-for="item in news"
           :key="item.id"
@@ -45,6 +47,7 @@ export default {
           :id="item.id"
           :is-open="item.isOpen"
           @toggle="toggleOpen(item.id)"
+          @openRate="openRate = openRate+1"
       ></app-news>
     </div>
   </div>
