@@ -47,7 +47,7 @@ export default {
           :id="item.id"
           :is-open="item.isOpen"
           @toggle="toggleOpen(item.id)"
-          @openRate="openRate = openRate+1"
+          @open-rate="openRate = openRate+1"
       ></app-news>
     </div>
   </div>

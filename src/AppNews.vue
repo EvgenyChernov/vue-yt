@@ -30,21 +30,31 @@ export default {
     open () {
       this.$emit('toggle')
       if (!this.isOpen) {
-        this.$emit('openRate')
+        this.$emit('open-rate')
       }
     }
   },
-  emits: [
-    'toggle',
-    'openRate'
-  ]
+  // emits: [
+  //   'toggle',
+  //   'openRate'
+  // ],
+  emits: {
+    toggle: null,
+    'open-rate' (num) {
+      if (num) {
+        return true
+      }
+      console.warn('no data in open-rate emit')
+      return false
+    }
+  }
 }
 </script>
 
 <template>
   <div>
     <h3> {{ title }}</h3>
-    <button @click="open()" class="btn btn-primary btn-sm">{{ isOpen ? 'закрыть' : 'открыть'}}</button>
+    <button @click="open()" class="btn btn-primary btn-sm">{{ isOpen ? 'закрыть' : 'открыть' }}</button>
     <p v-if="isOpen">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi placeat quibusdam sint
       temporibus
       totam?</p>
