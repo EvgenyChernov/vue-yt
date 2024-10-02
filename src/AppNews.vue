@@ -1,5 +1,24 @@
+<template>
+  <div>
+    <h3> {{ title }}</h3>
+    <app-button @action="open()">{{isOpen ? 'закрыть' : 'открыть'}}</app-button>
+    <div v-if="isOpen">
+      <hr/>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi placeat quibusdam sint
+        temporibus
+        totam?</p>
+      <app-button v-if="!wasRead" @action="toRedNews">Прочесть новость</app-button>
+      <app-button color="btn-warning" v-if="wasRead" @action="notReadNews">Отметить непрочитанной</app-button>
+    </div>
+
+  </div>
+</template>
+
 <script>
+import AppButton from '@/AppButton.vue'
+
 export default {
+  components: { AppButton },
   // props: [
   //   'title'
   // ],
@@ -64,19 +83,3 @@ export default {
   // }
 }
 </script>
-
-<template>
-  <div>
-    <h3> {{ title }}</h3>
-    <button @click="open()" class="btn btn-primary btn-sm">{{ isOpen ? 'закрыть' : 'открыть' }}</button>
-    <div v-if="isOpen" class="">
-      <hr/>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi placeat quibusdam sint
-        temporibus
-        totam?</p>
-      <button v-if="!wasRead" @click="toRedNews" class="btn btn-secondary btn-sm">Прочесть новость</button>
-      <button v-if="wasRead" @click="notReadNews" class="btn btn-secondary btn-sm">Отметить непрочитанной</button>
-    </div>
-
-  </div>
-</template>
