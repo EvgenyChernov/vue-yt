@@ -36,11 +36,11 @@
         </div>
         <div class="form-control w-max">
           <label class="label cursor-pointer space-x-2">
-            <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked="checked"/>
+            <input v-model="relocate" value="yes" type="radio" name="trip" class="radio checked:bg-red-500"/>
             <span class="label-text">Да</span>
           </label>
           <label class="label cursor-pointer space-x-2">
-            <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked="checked"/>
+            <input v-model="relocate" value="no" type="radio" name="trip" class="radio checked:bg-red-500"/>
             <span class="label-text">Нет</span>
           </label>
         </div>
@@ -74,7 +74,8 @@ export default {
     return {
       name: '',
       age: 23,
-      city: 'vrn'
+      city: 'vrn',
+      relocate: null
     }
   },
   methods: {
@@ -83,6 +84,7 @@ export default {
       console.log('Name:' + this.name)
       console.log('Age:' + this.age)
       console.log('City:' + this.city)
+      console.log('Relocate:' + this.relocate)
       console.groupEnd()
     }
   }
