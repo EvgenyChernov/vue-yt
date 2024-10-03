@@ -1,5 +1,6 @@
 <template>
   <div class="container pt-1">
+    <async-component></async-component>
     <h1>Динамические и ассинхронные компоненты </h1>
     <app-button
         ref="myButton"
