@@ -10,9 +10,12 @@
           <input
               type="text"
               placeholder="Type here"
-              class="input input-bordered w-full max-w-xs"
+              :class="['input input-bordered w-full max-w-xs', errors.name ? 'input-error' : '']"
               v-model.trim="name"
           />
+          <div v-if="errors.name" class="label">
+            <span class="label-text">{{errors.name}}</span>
+          </div>
         </label>
         <label class="form-control w-full max-w-xs">
           <div class="label">
@@ -81,19 +84,34 @@ export default {
       city: 'vrn',
       relocate: null,
       skills: [],
-      agree: false
+      agree: false,
+      errors: {
+        name: null
+      }
     }
   },
   methods: {
+    formIsValid () {
+      let isValid = true
+      if (this.name.length === 0) {
+        this.errors.name = 'Введите Ваше имя'
+        isValid = false
+      } else {
+        this.errors.name = null
+      }
+      return isValid
+    },
     submitHandler () {
-      console.group('Form data')
-      console.log('Name:' + this.name)
-      console.log('Age:' + this.age)
-      console.log('City:' + this.city)
-      console.log('Relocate:' + this.relocate)
-      console.log('Skills:' + this.skills)
-      console.log('Agree:' + this.agree)
-      console.groupEnd()
+      if (this.formIsValid()) {
+        console.group('Form data')
+        console.log('Name:' + this.name)
+        console.log('Age:' + this.age)
+        console.log('City:' + this.city)
+        console.log('Relocate:' + this.relocate)
+        console.log('Skills:' + this.skills)
+        console.log('Agree:' + this.agree)
+        console.groupEnd()
+      }
     }
   }
 }
