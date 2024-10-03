@@ -7,7 +7,12 @@
           <div class="label">
             <span class="label-text">Как тебя зовут?</span>
           </div>
-          <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs"/>
+          <input
+              type="text"
+              placeholder="Type here"
+              class="input input-bordered w-full max-w-xs"
+              v-model.trim="name"
+          />
         </label>
         <label class="form-control w-full max-w-xs">
           <div class="label">
@@ -59,9 +64,14 @@
 <script>
 
 export default {
+  data () {
+    return {
+      name: ''
+    }
+  },
   methods: {
     submitHandler () {
-      console.log('submitHandler')
+      console.log(this.name)
     }
   }
 }
