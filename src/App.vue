@@ -1,7 +1,7 @@
 <template>
   <div class="container h-dvh">
     <div class="bg-white mx-auto bg-neutral-100 rounded-3xl  w-96 p-7">
-      <form class="space-y-3">
+      <form class="space-y-3" @submit.prevent="submitHandler">
         <h2>Анкета на Vue разработчика!</h2>
         <label class="form-control w-full max-w-xs">
           <div class="label">
@@ -50,6 +50,7 @@
             <span class="label-text">Vue Router</span>
           </label>
         </div>
+        <button type="submit" class="btn btn-outline btn-success">Отправить</button>
       </form>
     </div>
   </div>
@@ -57,7 +58,13 @@
 
 <script>
 
-export default {}
+export default {
+  methods: {
+    submitHandler () {
+      console.log('submitHandler')
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
