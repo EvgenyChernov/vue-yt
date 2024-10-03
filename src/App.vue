@@ -1,34 +1,44 @@
 <template>
   <div class="container pt-1">
-    <h1>Slots</h1>
-    <app-list>
-      <template #default="{inx, iter}">
-        <span  style="color: #6ddb09;"> <strong>{{inx}}</strong> item: {{iter}}</span>
-      </template>
-    </app-list>
-    <app-block>
-      <template #footer>
-        <p>Это самый важный текст для этого приложения</p>
-      </template>
-      <template v-slot:header>
-        <h3>Это заголовок H3</h3>
-      </template>
-    </app-block>
+    <h1>Динамические и ассинхронные компоненты </h1>
+    <app-button
+        @action="active='one'"
+        :color="active === 'one' ? 'btn-primary': ''"
+    >ONE
+    </app-button>
+    <app-button
+        @action="active='two'"
+        :color="active === 'two' ? 'btn-primary': ''"
+    >TWO
+    </app-button>
+    <component :is="componentName"></component>
   </div>
 </template>
 
 <script>
-import AppBlock from '@/AppBlock.vue'
-import AppList from '@/AppList.vue'
-import colors from 'tailwindcss/colors'
+
+import AppButton from '@/AppButton.vue'
+import AppTextOne from '@/AppTextOne.vue'
+import AppTextTwo from '@/AppTextTwo.vue'
 
 export default {
-  methods: {
-    colors () {
-      return colors
+  methods: {},
+  data () {
+    return {
+      active: 'one'
     }
   },
-  components: { AppBlock, AppList }
+  components: { AppTextTwo, AppTextOne, AppButton },
+  computed: {
+    componentName () {
+      // if (this.active === 'one') {
+      //   return 'app-text-one'
+      // } else {
+      //   return 'app-text-two'
+      // }
+      return 'app-text-' + this.active
+    }
+  }
 }
 </script>
 
