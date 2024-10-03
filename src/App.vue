@@ -18,7 +18,13 @@
           <div class="label">
             <span class="label-text">Выбери возраст?</span>
           </div>
-          <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs"/>
+          <input
+              type="number"
+              id="age"
+              max="90"
+              class="input input-bordered w-full max-w-xs"
+              v-model.number="age"
+          />
         </label>
         <select class="select select-bordered w-full max-w-xs">
           <option disabled selected>Твой город</option>
@@ -66,12 +72,16 @@
 export default {
   data () {
     return {
-      name: ''
+      name: '',
+      age: 23
     }
   },
   methods: {
     submitHandler () {
-      console.log(this.name)
+      console.group('Form data')
+      console.log('Name:' + this.name)
+      console.log('Age:' + this.age)
+      console.groupEnd()
     }
   }
 }
