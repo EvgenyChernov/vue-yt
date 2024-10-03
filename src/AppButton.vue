@@ -15,7 +15,12 @@ export default {
       }
     }
   },
-  emits: ['action']
+  emits: ['action'],
+  methods: {
+    btlLog () {
+      console.log('btlLog')
+    }
+  }
 }
 </script>
 

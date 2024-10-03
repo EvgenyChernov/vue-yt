@@ -2,6 +2,7 @@
   <div class="container pt-1">
     <h1>Динамические и ассинхронные компоненты </h1>
     <app-button
+        ref="myButton"
         @action="active='one'"
         :color="oneColor"
     >ONE
@@ -31,7 +32,8 @@ export default {
     }
   },
   mounted () {
-    setTimeout(() => { this.componentName = 'sadasd' }, 1500)
+    // setTimeout(() => { this.componentName = 'sadasd' }, 1500)
+    this.$refs.myButton.btlLog()
   },
   components: { AppTextTwo, AppTextOne, AppButton },
   computed: {
@@ -43,7 +45,7 @@ export default {
         return 'app-text-' + this.active
       },
       set (value) {
-        console.log(value)
+        // console.log(value)
       }
     },
     oneColor () {
