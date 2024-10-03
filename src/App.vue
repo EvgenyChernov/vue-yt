@@ -26,10 +26,10 @@
               v-model.number="age"
           />
         </label>
-        <select class="select select-bordered w-full max-w-xs">
+        <select v-model="city" class="select select-bordered w-full max-w-xs">
           <option disabled selected>Твой город</option>
-          <option>Тамбов</option>
-          <option>Воронеж</option>
+          <option value="tmb">Тамбов</option>
+          <option value="vrn">Воронеж</option>
         </select>
         <div class="label">
           <span class="label-text">Готов к переезду в Токио?</span>
@@ -73,7 +73,8 @@ export default {
   data () {
     return {
       name: '',
-      age: 23
+      age: 23,
+      city: 'vrn'
     }
   },
   methods: {
@@ -81,6 +82,7 @@ export default {
       console.group('Form data')
       console.log('Name:' + this.name)
       console.log('Age:' + this.age)
+      console.log('City:' + this.city)
       console.groupEnd()
     }
   }
