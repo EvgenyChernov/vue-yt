@@ -49,18 +49,22 @@
         </div>
         <div class="form-control w-max ">
           <label class="label cursor-pointer space-x-2">
-            <input type="checkbox" checked="checked" class="checkbox"/>
+            <input type="checkbox" checked="checked" v-model="skills" name="skills" value="Vuex" class="checkbox"/>
             <span class="label-text">Vuex</span>
           </label>
           <label class="label cursor-pointer space-x-2">
-            <input type="checkbox" checked="checked" class="checkbox"/>
+            <input type="checkbox" v-model="skills" name="skills" value="Vue-CLI" class="checkbox"/>
             <span class="label-text">Vue CLI</span>
           </label>
           <label class="label cursor-pointer space-x-2">
-            <input type="checkbox" checked="checked" class="checkbox"/>
+            <input type="checkbox" v-model="skills" name="skills" value="Vue-Router" class="checkbox"/>
             <span class="label-text">Vue Router</span>
           </label>
         </div>
+        <label class="label cursor-pointer space-x-2">
+          <input type="checkbox" v-model="agree" class="checkbox"/>
+          <span class="label-text">Vue Router</span>
+        </label>
         <button type="submit" class="btn btn-outline btn-success">Отправить</button>
       </form>
     </div>
@@ -75,7 +79,9 @@ export default {
       name: '',
       age: 23,
       city: 'vrn',
-      relocate: null
+      relocate: null,
+      skills: [],
+      agree: false
     }
   },
   methods: {
@@ -85,6 +91,8 @@ export default {
       console.log('Age:' + this.age)
       console.log('City:' + this.city)
       console.log('Relocate:' + this.relocate)
+      console.log('Skills:' + this.skills)
+      console.log('Agree:' + this.agree)
       console.groupEnd()
     }
   }
