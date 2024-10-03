@@ -30,15 +30,21 @@ export default {
       active: 'one'
     }
   },
+  mounted () {
+    setTimeout(() => { this.componentName = 'sadasd' }, 1500)
+  },
   components: { AppTextTwo, AppTextOne, AppButton },
   computed: {
-    componentName () {
-      // if (this.active === 'one') {
-      //   return 'app-text-one'
-      // } else {
-      //   return 'app-text-two'
-      // }
-      return 'app-text-' + this.active
+    // componentName () {
+    //   return 'app-text-' + this.active
+    // },
+    componentName: {
+      get () {
+        return 'app-text-' + this.active
+      },
+      set (value) {
+        console.log(value)
+      }
     },
     oneColor () {
       return this.active === 'one' ? 'btn-primary' : ''
