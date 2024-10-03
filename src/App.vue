@@ -1,62 +1,63 @@
 <template>
-  <div class="container pt-1">
-    <async-component></async-component>
-    <h1>Динамические и ассинхронные компоненты </h1>
-    <app-button
-        ref="myButton"
-        @action="active='one'"
-        :color="oneColor"
-    >ONE
-    </app-button>
-    <app-button
-        @action="active='two'"
-        :color="twoColor"
-    >TWO
-    </app-button>
-    <keep-alive>
-      <component :is="componentName"></component>
-    </keep-alive>
+  <div class="container h-dvh">
+    <div class="bg-white mx-auto bg-neutral-100 rounded-3xl  w-96 p-7">
+      <form class="space-y-3">
+        <h2>Анкета на Vue разработчика!</h2>
+        <label class="form-control w-full max-w-xs">
+          <div class="label">
+            <span class="label-text">Как тебя зовут?</span>
+          </div>
+          <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs"/>
+        </label>
+        <label class="form-control w-full max-w-xs">
+          <div class="label">
+            <span class="label-text">Выбери возраст?</span>
+          </div>
+          <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs"/>
+        </label>
+        <select class="select select-bordered w-full max-w-xs">
+          <option disabled selected>Твой город</option>
+          <option>Тамбов</option>
+          <option>Воронеж</option>
+        </select>
+        <div class="label">
+          <span class="label-text">Готов к переезду в Токио?</span>
+        </div>
+        <div class="form-control w-max">
+          <label class="label cursor-pointer space-x-2">
+            <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked="checked"/>
+            <span class="label-text">Да</span>
+          </label>
+          <label class="label cursor-pointer space-x-2">
+            <input type="radio" name="radio-10" class="radio checked:bg-red-500" checked="checked"/>
+            <span class="label-text">Нет</span>
+          </label>
+        </div>
+        <div class="label">
+          <span class="label-text">Что знаешь во Vue?</span>
+        </div>
+        <div class="form-control w-max ">
+          <label class="label cursor-pointer space-x-2">
+            <input type="checkbox" checked="checked" class="checkbox"/>
+            <span class="label-text">Vuex</span>
+          </label>
+          <label class="label cursor-pointer space-x-2">
+            <input type="checkbox" checked="checked" class="checkbox"/>
+            <span class="label-text">Vue CLI</span>
+          </label>
+          <label class="label cursor-pointer space-x-2">
+            <input type="checkbox" checked="checked" class="checkbox"/>
+            <span class="label-text">Vue Router</span>
+          </label>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
 
-import AppButton from '@/AppButton.vue'
-import AppTextOne from '@/AppTextOne.vue'
-import AppTextTwo from '@/AppTextTwo.vue'
-
-export default {
-  methods: {},
-  data () {
-    return {
-      active: 'one'
-    }
-  },
-  mounted () {
-    // setTimeout(() => { this.componentName = 'sadasd' }, 1500)
-    this.$refs.myButton.btlLog()
-  },
-  components: { AppTextTwo, AppTextOne, AppButton },
-  computed: {
-    // componentName () {
-    //   return 'app-text-' + this.active
-    // },
-    componentName: {
-      get () {
-        return 'app-text-' + this.active
-      },
-      set (value) {
-        // console.log(value)
-      }
-    },
-    oneColor () {
-      return this.active === 'one' ? 'btn-primary' : ''
-    },
-    twoColor () {
-      return this.active === 'two' ? 'btn-primary' : ''
-    }
-  }
-}
+export default {}
 </script>
 
 <style lang="scss" scoped>
