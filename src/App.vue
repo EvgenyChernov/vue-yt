@@ -3,20 +3,12 @@
     <div class="bg-white mx-auto bg-neutral-100 rounded-3xl  w-96 p-7">
       <form class="space-y-3" @submit.prevent="submitHandler">
         <h2>Анкета на Vue разработчика!</h2>
-        <label class="form-control w-full max-w-xs">
-          <div class="label">
-            <span class="label-text">Как тебя зовут?</span>
-          </div>
-          <input
-              type="text"
-              placeholder="Type here"
-              :class="['input input-bordered w-full max-w-xs', errors.name ? 'input-error' : '']"
-              v-model.trim="name"
-          />
-          <div v-if="errors.name" class="label">
-            <span class="label-text">{{errors.name}}</span>
-          </div>
-        </label>
+        <app-input
+          placeholder="Введите имя"
+          :error="errors.name"
+          label="Как тебя зовут?"
+          v-model:value="name"
+        ></app-input>
         <label class="form-control w-full max-w-xs">
           <div class="label">
             <span class="label-text">Выбери возраст?</span>
@@ -75,6 +67,7 @@
 </template>
 
 <script>
+import AppInput from '@/AppInput.vue'
 
 export default {
   data () {
@@ -113,7 +106,8 @@ export default {
         console.groupEnd()
       }
     }
-  }
+  },
+  components: { AppInput }
 }
 </script>
 
