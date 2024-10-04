@@ -86,8 +86,23 @@ export default {
       }
     },
     async removePerson (id) {
-      await axios.delete(`https://vue-yt-2f717-default-rtdb.europe-west1.firebasedatabase.app/people/${id}.json`)
-      this.people = this.people.filter(person => person.id !== id)
+      try {
+        // const person = this.people.filter(person => person.id === id)[0]
+        const person = this.people.find(person => person.id === id)
+        await axios.delete(`https://vue-yt-2f717-default-rtdb.europe-west1.firebasedatabase.app/people/${id}.json`)
+        this.people = this.people.filter(person => person.id !== id)
+        this.alert = {
+          type: 'info',
+          title: 'Информация',
+          text: 'Пользователь ' + person.firstName + ' удален'
+        }
+      } catch (e) {
+        this.alert = {
+          type: 'error',
+          title: 'Ошибка',
+          text: e.message
+        }
+      }
     }
   },
   components: { AppAlert, AppPeopleList }
