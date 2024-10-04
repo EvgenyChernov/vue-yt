@@ -3,7 +3,13 @@
     <div
         v-for="person in people"
         :key="person.id"
-    >{{ person.firstName }}</div>
+        class="flex space-x-4 items-center p-2"
+    >
+      <h3>
+        {{ person.firstName }}
+      </h3>
+      <button @click="$emit('remove', person.id)" class="btn btn-error btn-xs" >X</button>
+    </div>
   </div>
   <div v-else class="bg-white rounded-3xl w-auto p-7 flex justify-center">
     <button class="btn btn-success" @click="$emit('load')">Загрузить пользователей</button>
@@ -12,7 +18,7 @@
 
 <script>
 export default {
-  emits: ['load'],
+  emits: ['load', 'remove'],
   props: ['people']
 }
 </script>

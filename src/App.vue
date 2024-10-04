@@ -21,6 +21,7 @@
 
     <app-people-list
         @load="loadPeople"
+        @remove="removePerson"
         :people="people"
     ></app-people-list>
 
@@ -38,6 +39,9 @@ export default {
       people: []
     }
   },
+  mounted () {
+    this.loadPeople()
+  },
   methods: {
     async createPerson () {
       const url = 'https://vue-yt-2f717-default-rtdb.europe-west1.firebasedatabase.app/people.json'
@@ -52,7 +56,10 @@ export default {
       })
 
       const fireBaseData = await response.json()
-      console.log(fireBaseData)
+      this.people.push({
+        firstName: this.name,
+        id: fireBaseData.name
+      })
       this.name = ''
     },
     async loadPeople () {
@@ -63,6 +70,10 @@ export default {
           ...data[key]
         }
       })
+    },
+    async removePerson (id) {
+      await axios.delete(`https://vue-yt-2f717-default-rtdb.europe-west1.firebasedatabase.app/people/${id}.json`)
+      this.people = this.people.filter(person => person.id !== id)
     }
   },
   components: { AppPeopleList }
