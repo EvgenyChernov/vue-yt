@@ -1,5 +1,6 @@
 <template>
   <div class="container mx-auto space-y-5">
+    <app-alert :alert="alert" @close="alert=null"></app-alert>
     <div class="bg-white rounded-3xl w-auto p-7">
       <form class="form-control space-y-5" @submit.prevent="createPerson">
         <label class="form-control w-full max-w-xs">
@@ -31,12 +32,14 @@
 <script>
 import AppPeopleList from '@/AppPeopleList.vue'
 import axios from 'axios'
+import AppAlert from '@/AppAlert.vue'
 
 export default {
   data () {
     return {
       name: '',
-      people: []
+      people: [],
+      alert: null
     }
   },
   mounted () {
@@ -63,20 +66,31 @@ export default {
       this.name = ''
     },
     async loadPeople () {
-      const { data } = await axios.get('https://vue-yt-2f717-default-rtdb.europe-west1.firebasedatabase.app/people.json')
-      this.people = Object.keys(data).map(key => {
-        return {
-          id: key,
-          ...data[key]
+      try {
+        const { data } = await axios.get('https://vue-yt-2f717-default-rtdb.europe-west1.firebasedatabase.app/people.json')
+        if (!data) {
+          throw new Error('нет пользователей')
         }
-      })
+        this.people = Object.keys(data).map(key => {
+          return {
+            id: key,
+            ...data[key]
+          }
+        })
+      } catch (e) {
+        this.alert = {
+          type: 'error',
+          title: 'Ошибка',
+          text: e.message
+        }
+      }
     },
     async removePerson (id) {
       await axios.delete(`https://vue-yt-2f717-default-rtdb.europe-west1.firebasedatabase.app/people/${id}.json`)
       this.people = this.people.filter(person => person.id !== id)
     }
   },
-  components: { AppPeopleList }
+  components: { AppAlert, AppPeopleList }
 }
 </script>
 
