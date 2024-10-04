@@ -30,7 +30,21 @@ export default {
     }
   },
   methods: {
-    createPerson () {
+    async createPerson () {
+      const url = 'https://vue-yt-2f717-default-rtdb.europe-west1.firebasedatabase.app/people.json'
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          firstName: this.name
+        })
+      })
+
+      const fireBaseData = await response.json()
+      console.log(fireBaseData)
+      this.name = ''
     }
   }
 }
