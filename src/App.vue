@@ -1,88 +1,81 @@
 <template>
   <div class="container mx-auto space-y-3 pt-3">
     <div class="flex space-x-3">
-      <form @submit.prevent="submitSelection" class="bg-white rounded-xl min-w-80 w-1/3 p-4 space-y-2">
+      <form @submit.prevent="" class="bg-white rounded-xl min-w-80 w-1/3 p-4 space-y-2">
         <AppSelect
             v-model="selectedOption"
             :options="options"
             label="Тип блока"
         />
-        <label class="form-control">
-          <div class="label">
-            <span class="label-text">Значение</span>
-          </div>
-          <textarea class="textarea  textarea-bordered h-24" placeholder="Bio"></textarea>
-        </label>
-        <button type="submit" class="btn">Добавить</button>
+        <AppTextarea
+            v-model="textValue"
+            label="Значение"
+            placeholder="Введите текст"
+        />
+        <app-button
+            type="submit"
+            color="btn-primary"
+            @action="submitSelection"
+            :class="{ 'btn-disabled': textValue.length < 3 }"
+        >Добавить
+        </app-button>
       </form>
       <div class="bg-white rounded-xl w-2/3 p-4">
-        <article class="prose">
-          <h1>Резюме Имя</h1>
-        </article>
-        <div class="flex justify-center p-4">
-          <div class="avatar">
-            <div class="w-40 rounded-xl">
-              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"/>
-            </div>
-          </div>
-        </div>
-        <article class="prose">
-          <h2>О себе</h2>
-          <p>
-            For years parents have espoused the health benefits of eating garlic bread with cheese to their
-            children, with the food earning such an iconic status in our culture that kids will often dress
-            up as warm, cheesy loaf for Halloween.
-          </p>
-        </article>
-        <article class="prose">
-          <h2>Опыт работы</h2>
-          <p>
-            For years parents have espoused the health benefits of eating garlic bread with cheese to their
-            children, with the food earning such an iconic status in our culture that kids will often dress
-            up as warm, cheesy loaf for Halloween.
-          </p>
-        </article>
+        <AppResume
+            :userResume="userResume"
+        />
       </div>
     </div>
-    <div class="flex">
-      <div class="bg-white w-full rounded-xl p-4 space-y-2">
-        <article class="prose">
-          <h2>Комментарии</h2>
-        </article>
-        <article class="prose max-w-none">
-          <h3>asdasd@asda.asc</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore expedita fuga illo nobis quaerat quisquam
-            voluptate! Accusantium cumque deleniti earum, est quos rerum sint vero. Atque omnis placeat quas
-            repellat?</p>
-        </article>
-        <div class="divider"></div>
-        <article class="prose max-w-none">
-          <h3>asdasd@asda.asc</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore expedita fuga illo nobis quaerat quisquam
-            voluptate! Accusantium cumque deleniti earum, est quos rerum sint vero. Atque omnis placeat quas
-            repellat?</p>
-        </article>
-      </div>
-    </div>
+    <AppCommentList
+        :comments="comments"
+        @load-components="loadComments"
+        :isLoadingComments="isLoadingComments"
+    />
   </div>
 </template>
 
 <script>
 import AppSelect from '@/AppSelect.vue'
+import AppTextarea from '@/AppTextarea.vue'
+import AppButton from '@/AppButton.vue'
+import AppResume from '@/AppResume.vue'
+import AppCommentList from '@/AppCommentList.vue'
+import axios from 'axios'
 
 export default {
   components: {
+    AppCommentList,
+    AppResume,
+    AppButton,
+    AppTextarea,
     AppSelect
   },
   data () {
     return {
       selectedOption: null,
+      textValue: '',
       options: [
         { id: 'title', name: 'Заголовок' },
         { id: 'subtitle', name: 'Подзаголовок' },
         { id: 'avatar', name: 'Аватар' },
         { id: 'text', name: 'Текст' }
-      ]
+      ],
+      userResume: [
+        { key: 'title', value: 'Ангелина' },
+        { key: 'avatar', value: 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp' },
+        { key: 'subtitle', value: 'О себе' },
+        {
+          key: 'text',
+          value: 'Я увлечённый разработчик с опытом работы в области веб-программирования. Люблю создавать удобные и функциональные интерфейсы, а также оптимизировать код для достижения наилучшей производительности. В свободное время изучаю новые технологии и работаю над личными проектами. Ценю командную работу и всегда стремлюсь к новым вызовам в своей профессиональной карьере.'
+        },
+        { key: 'subtitle', value: 'Опыт работы' },
+        {
+          key: 'text',
+          value: 'В своей последней роли я отвечал за архитектуру и реализацию микросервисной архитектуры, что значительно повысило производительность и масштабируемость приложения. Участвовал в разработке нескольких крупных проектов, где сотрудничал с командами разработчиков и дизайнерами. В процессе работы активно применял методологии Agile, что позволило эффективно управлять проектами и достигать поставленных целей в срок.'
+        }
+      ],
+      comments: [],
+      isLoadingComments: false
     }
   },
   mounted () {
@@ -90,7 +83,17 @@ export default {
   },
   methods: {
     submitSelection () {
-      console.log(this.selectedOption)
+      this.userResume.push({
+        key: this.selectedOption.id,
+        value: this.textValue
+      })
+    },
+    async loadComments () {
+      this.isLoadingComments = true
+      const url = 'https://jsonplaceholder.typicode.com/comments'
+      const { data } = await axios.get(url, {})
+      this.comments = data
+      this.isLoadingComments = false
     }
   }
 }

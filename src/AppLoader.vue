@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-center w-full">
-    <span class="loading loading-ring loading-lg text-success"></span>
+    <span class="loading loading-spinner loading-lg text-warning"></span>
   </div>
 </template>
 
