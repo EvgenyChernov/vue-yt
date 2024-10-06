@@ -1,118 +1,98 @@
 <template>
-  <div class="container mx-auto space-y-5">
-    <app-alert :alert="alert" @close="alert=null"></app-alert>
-    <div class="bg-white rounded-3xl w-auto p-7">
-      <form class="form-control space-y-5" @submit.prevent="createPerson">
-        <label class="form-control w-full max-w-xs">
+  <div class="container mx-auto space-y-3 pt-3">
+    <div class="flex space-x-3">
+      <form @submit.prevent="submitSelection" class="bg-white rounded-xl min-w-80 w-1/3 p-4 space-y-2">
+        <AppSelect
+            v-model="selectedOption"
+            :options="options"
+            label="Тип блока"
+        />
+        <label class="form-control">
           <div class="label">
-            <span class="label-text">What is your name?</span>
+            <span class="label-text">Значение</span>
           </div>
-          <input
-              v-model="name"
-              type="text"
-              placeholder="Type here"
-              class="input input-bordered w-full max-w-xs"
-          />
+          <textarea class="textarea  textarea-bordered h-24" placeholder="Bio"></textarea>
         </label>
-        <div class="">
-          <button class="btn" :disabled="name.length === 0">Создать человека</button>
-        </div>
+        <button type="submit" class="btn">Добавить</button>
       </form>
+      <div class="bg-white rounded-xl w-2/3 p-4">
+        <article class="prose">
+          <h1>Резюме Имя</h1>
+        </article>
+        <div class="flex justify-center p-4">
+          <div class="avatar">
+            <div class="w-40 rounded-xl">
+              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"/>
+            </div>
+          </div>
+        </div>
+        <article class="prose">
+          <h2>О себе</h2>
+          <p>
+            For years parents have espoused the health benefits of eating garlic bread with cheese to their
+            children, with the food earning such an iconic status in our culture that kids will often dress
+            up as warm, cheesy loaf for Halloween.
+          </p>
+        </article>
+        <article class="prose">
+          <h2>Опыт работы</h2>
+          <p>
+            For years parents have espoused the health benefits of eating garlic bread with cheese to their
+            children, with the food earning such an iconic status in our culture that kids will often dress
+            up as warm, cheesy loaf for Halloween.
+          </p>
+        </article>
+      </div>
     </div>
-    <app-loader v-if="loading"></app-loader>
-    <app-people-list
-        v-else
-        @load="loadPeople"
-        @remove="removePerson"
-        :people="people"
-    ></app-people-list>
-
+    <div class="flex">
+      <div class="bg-white w-full rounded-xl p-4 space-y-2">
+        <article class="prose">
+          <h2>Комментарии</h2>
+        </article>
+        <article class="prose max-w-none">
+          <h3>asdasd@asda.asc</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore expedita fuga illo nobis quaerat quisquam
+            voluptate! Accusantium cumque deleniti earum, est quos rerum sint vero. Atque omnis placeat quas
+            repellat?</p>
+        </article>
+        <div class="divider"></div>
+        <article class="prose max-w-none">
+          <h3>asdasd@asda.asc</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore expedita fuga illo nobis quaerat quisquam
+            voluptate! Accusantium cumque deleniti earum, est quos rerum sint vero. Atque omnis placeat quas
+            repellat?</p>
+        </article>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import AppPeopleList from '@/AppPeopleList.vue'
-import axios from 'axios'
-import AppAlert from '@/AppAlert.vue'
-import AppLoader from '@/AppLoader.vue'
+import AppSelect from '@/AppSelect.vue'
 
 export default {
+  components: {
+    AppSelect
+  },
   data () {
     return {
-      name: '',
-      people: [],
-      alert: null,
-      loading: false
+      selectedOption: null,
+      options: [
+        { id: 'title', name: 'Заголовок' },
+        { id: 'subtitle', name: 'Подзаголовок' },
+        { id: 'avatar', name: 'Аватар' },
+        { id: 'text', name: 'Текст' }
+      ]
     }
   },
   mounted () {
-    this.loadPeople()
+    this.selectedOption = this.options[0]
   },
   methods: {
-    async createPerson () {
-      const url = 'https://vue-yt-2f717-default-rtdb.europe-west1.firebasedatabase.app/people.json'
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          firstName: this.name
-        })
-      })
-
-      const fireBaseData = await response.json()
-      this.people.push({
-        firstName: this.name,
-        id: fireBaseData.name
-      })
-      this.name = ''
-    },
-    async loadPeople () {
-      try {
-        this.loading = true
-        const { data } = await axios.get('https://vue-yt-2f717-default-rtdb.europe-west1.firebasedatabase.app/people.json')
-        if (!data) {
-          throw new Error('нет пользователей')
-        }
-        this.people = Object.keys(data).map(key => {
-          return {
-            id: key,
-            ...data[key]
-          }
-        })
-        this.loading = false
-      } catch (e) {
-        this.alert = {
-          type: 'error',
-          title: 'Ошибка',
-          text: e.message
-        }
-        this.loading = false
-        console.log(e.message)
-      }
-    },
-    async removePerson (id) {
-      try {
-        // const person = this.people.filter(person => person.id === id)[0]
-        const person = this.people.find(person => person.id === id)
-        await axios.delete(`https://vue-yt-2f717-default-rtdb.europe-west1.firebasedatabase.app/people/${id}.json`)
-        this.people = this.people.filter(person => person.id !== id)
-        this.alert = {
-          type: 'info',
-          title: 'Информация',
-          text: 'Пользователь ' + person.firstName + ' удален'
-        }
-      } catch (e) {
-        this.alert = {
-          type: 'error',
-          title: 'Ошибка',
-          text: e.message
-        }
-      }
+    submitSelection () {
+      console.log(this.selectedOption)
     }
-  },
-  components: { AppLoader, AppAlert, AppPeopleList }
+  }
 }
 </script>
 
