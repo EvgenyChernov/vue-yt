@@ -1,5 +1,6 @@
 <template>
   <div class="container mx-auto space-y-3 pt-3">
+    <router-view></router-view>
     <div class="bg-white rounded-xl p-5">
       <h2>{{ $i18n('app.title') }}</h2>
       <button @click="$alert('Наш алерт2')" class="btn">Алерт</button>
