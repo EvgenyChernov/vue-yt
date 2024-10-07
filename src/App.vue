@@ -2,7 +2,7 @@
   <div class="container mx-auto space-y-3 pt-3">
     <div class="bg-white rounded-xl p-5">
       <h2 v-color:[type]="myColor">Директивы</h2>
-      <div v-color:[type]="myColor" class="flex flex-col">
+      <div v-color:[type].blink="myColor" class="flex flex-col">
         <label for="inp">Активный по умолчанию</label>
         <input v-focus  type="text" id="inp">
       </div>
