@@ -1,11 +1,12 @@
 <template>
   <div class="bg-white rounded-xl p-5">
-    LOGIN
+    Страница восстановления пароля
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+}
 </script>
 
 <style lang="scss" scoped>

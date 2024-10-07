@@ -1,11 +1,13 @@
 <template>
   <div class="bg-white rounded-xl p-5">
-    LOGIN
+    MAIL
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+
+}
 </script>
 
 <style lang="scss" scoped>

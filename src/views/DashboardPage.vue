@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white rounded-xl p-5">
-    LOGIN
+    ДАшбоард
   </div>
 </template>
 
@@ -9,5 +9,4 @@ export default {}
 </script>
 
 <style lang="scss" scoped>
-
 </style>
