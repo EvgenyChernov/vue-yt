@@ -1,29 +1,27 @@
 <template>
   <div class="container mx-auto space-y-3 pt-3">
     <div class="bg-white rounded-xl p-5">
-      <button @click="toggleAlert" class="btn btn-primary">
+      <button @click="toggleAlert" class="btn btn-secondary">
         Показать сообщение
       </button>
       <app-alert
           v-show="alert"
           @close="toggleAlert"
           :text="'содержимое Алерта'"
-          type="alert-success"
+          type="alert-error"
       ></app-alert>
     </div>
-    <app-block></app-block>
   </div>
 </template>
 
 <script>
 
 import AppAlert from '@/components/AppAlert.vue'
-import AppBlock from '@/components/AppBlock.vue'
 import AlertMixin from '@/alertMixin'
 
 export default {
   mixins: [AlertMixin],
-  components: { AppBlock, AppAlert }
+  components: { AppAlert }
 }
 </script>
 
