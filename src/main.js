@@ -5,5 +5,10 @@ import './assets/tailwind.css'
 
 const app = createApp(App)
 
+// app.directive('focus', {
+//   mounted (el) {
+//     el.focus()
+//   }
+// })
 // app.mixin(alertMixin)
 app.mount('#app')

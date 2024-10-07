@@ -1,29 +1,23 @@
 <template>
   <div class="container mx-auto space-y-3 pt-3">
     <div class="bg-white rounded-xl p-5">
-      <button @click="toggleAlert" class="btn btn-primary">
-        Показать сообщение
-      </button>
-      <app-alert
-          v-show="alert"
-          @close="toggleAlert"
-          :text="'содержимое Алерта'"
-          type="alert-success"
-      ></app-alert>
+      <h2>Директивы</h2>
+      <div class="flex flex-col">
+        <label for="inp">Активный по умолчанию</label>
+        <input v-focus type="text" id="inp">
+      </div>
     </div>
-    <app-block></app-block>
   </div>
 </template>
 
 <script>
 
-import AppAlert from '@/components/AppAlert.vue'
-import AppBlock from '@/components/AppBlock.vue'
-import AlertMixin from '@/alertMixin'
+import focusDirective from '@/focusDirective'
 
 export default {
-  mixins: [AlertMixin],
-  components: { AppBlock, AppAlert }
+  directives: {
+    focus: focusDirective
+  }
 }
 </script>
 
