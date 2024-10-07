@@ -1,6 +1,20 @@
 <template>
-  <div class="container mx-auto space-y-3 pt-3">
+  <div class="container mx-auto space-y-2">
+    <div class="navbar bg-base-100">
+      <div class="flex-1">
+        <a class="btn btn-ghost text-xl">daisyUI</a>
+      </div>
+      <div class="flex-none">
+        <ul class="menu menu-horizontal px-1">
+          <li><router-link to="/forget">forget</router-link></li>
+          <li><router-link to="/login">login</router-link></li>
+          <li><router-link to="/dashboard">dashboard</router-link></li>
+          <li><router-link to="/mail">mail</router-link></li>
+        </ul>
+      </div>
+    </div>
     <router-view></router-view>
+    <a href="/forget"></a>
     <div class="bg-white rounded-xl p-5">
       <h2>{{ $i18n('app.title') }}</h2>
       <button @click="$alert('Наш алерт2')" class="btn">Алерт</button>
