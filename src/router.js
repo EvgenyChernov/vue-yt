@@ -6,11 +6,17 @@ import MailPage from '@/views/MailPage.vue'
 import MailItemPage from '@/views/MailItemPage.vue'
 import NotFoundPage from '@/views/NotFoundPage.vue'
 
-export default createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/login', component: LoginPage, alias: '/' },
-    { path: '/forget', component: ForgetPage },
+    {
+      path: '/forget',
+      component: ForgetPage,
+      meta: {
+        cantEnter: false
+      }
+    },
     { path: '/dashboard', component: DashboardPage },
     {
       path: '/mail',
@@ -25,3 +31,12 @@ export default createRouter({
   linkActiveClass: 'btn-active',
   linkExactActiveClass: 'btn-active'
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.cantEnter) {
+    next('/login')
+  } else {
+    next()
+  }
+})
+export default router
