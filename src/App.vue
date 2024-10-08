@@ -32,7 +32,12 @@
             <router-link to="/dashboard">dashboard</router-link>
           </li>
           <li>
-            <router-link to="/mail">mail</router-link>
+            <router-link to="/mail" custom v-slot="{ navigate, href }">
+              <a @click="navigate" href="#"
+              :class="{
+                'btn-active': $route.path.indexOf(href) !== -1
+              }">Mail</a>
+            </router-link>
           </li>
           <li v-show="isAuth" >
             <button @click="logout">Выйти</button>
