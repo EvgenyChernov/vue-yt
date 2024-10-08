@@ -4,6 +4,7 @@ import ForgetPage from '@/views/ForgetPage.vue'
 import DashboardPage from '@/views/DashboardPage.vue'
 import MailPage from '@/views/MailPage.vue'
 import MailItemPage from '@/views/MailItemPage.vue'
+import NotFoundPage from '@/views/NotFoundPage.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -17,7 +18,9 @@ export default createRouter({
       children: [
         { path: ':mailId', component: MailItemPage, props: true }
       ]
-    }
+    },
+    // { path: '/:notFound(.*)', redirect: '/login' }
+    { path: '/:notFound(.*)', component: NotFoundPage }
   ],
   linkActiveClass: 'btn-active',
   linkExactActiveClass: 'btn-active'
