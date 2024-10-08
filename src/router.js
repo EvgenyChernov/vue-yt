@@ -27,6 +27,7 @@ const router = createRouter({
     {
       path: '/mail',
       component: MailPage,
+      name: 'email',
       children: [
         { path: ':mailId', component: MailItemPage, props: true }
       ]
