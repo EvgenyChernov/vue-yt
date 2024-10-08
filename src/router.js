@@ -17,7 +17,13 @@ const router = createRouter({
         cantEnter: false
       }
     },
-    { path: '/dashboard', component: DashboardPage },
+    {
+      path: '/dashboard',
+      component: DashboardPage,
+      beforeEnter () {
+      // тут собирается аналитика
+      }
+    },
     {
       path: '/mail',
       component: MailPage,
@@ -40,4 +46,9 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+
+router.afterEach((to, from, next) => {
+  // тут собирается аналитика
+})
+
 export default router
