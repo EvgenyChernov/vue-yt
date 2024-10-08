@@ -9,7 +9,7 @@ import NotFoundPage from '@/views/NotFoundPage.vue'
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/login', component: LoginPage, alias: '/' },
+    { path: '/login', component: LoginPage, alias: '/', name: 'login' },
     {
       path: '/forget',
       component: ForgetPage,
@@ -33,8 +33,9 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  // место для авторизации
   if (to.meta.cantEnter) {
-    next('/login')
+    next({ name: 'login' })
   } else {
     next()
   }
