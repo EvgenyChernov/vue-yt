@@ -5,7 +5,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  beforeRouteEnter (to, from, next) {
+    console.log('beforeRouteEnter')
+  }
+}
 </script>
 
 <style lang="scss" scoped>
