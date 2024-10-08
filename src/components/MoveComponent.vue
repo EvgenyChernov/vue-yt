@@ -10,11 +10,11 @@
         <h2 class="card-title">{{ move.original_title }} ({{ move.release_date }})</h2>
         <p>{{ move.overview }}</p>
         <div class="card-actions justify-end">
-          <button class="btn btn-primary">
-            <span v-if="!move.isWatched">Просмотрено</span>
+          <button class="btn btn-primary" @click="moveStore.toggleWatched(move.id)">
+            <span v-if="!move.isWatched" >Просмотрено</span>
             <span v-else>Убрать из просмотренного</span>
           </button>
-          <button class="btn btn-error">Удалить</button>
+          <button class="btn btn-error" @click="moveStore.deleteMovie(move.id)">Удалить</button>
         </div>
       </div>
     </div>
@@ -22,7 +22,10 @@
 </template>
 
 <script setup>
-// eslint-disable-next-line no-undef,no-unused-vars
+import { useMoveStore } from '@/stores/MoveStore'
+const moveStore = useMoveStore()
+
+// eslint-disable-next-line no-unused-vars,no-undef
 const props = defineProps({
   move: {
     type: Object,
