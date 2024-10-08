@@ -23,5 +23,13 @@ export const useMoveStore = defineStore('moveStore', {
       }
     ],
     activeTab: 1
-  })
+  }),
+  getters: {
+    watchedMovies () {
+      return this.movies.filter((el) => el.isWatched === true)
+    },
+    totalCount () {
+      return this.movies.length
+    }
+  }
 })

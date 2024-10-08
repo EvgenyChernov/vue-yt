@@ -56,6 +56,13 @@
       <button :class="['btn', {'btn-success' : moveStore.activeTab === 1}]">Favorite</button>
       <button :class="['btn', {'btn-success' : moveStore.activeTab !== 1}]">Search</button>
     </div>
+    <h3 class="bg-white">Watched moves {{moveStore.watchedMovies.length}}</h3>
+    <div class="bg-gray-200 rounded-box grid p-5" v-if="moveStore.activeTab === 1">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+        <Move v-for="move in moveStore.watchedMovies" :key="move.id" :move="move"/>
+      </div>
+    </div>
+    <h3 class="bg-white">All Movies {{moveStore.totalCount}}</h3>
     <div class="bg-gray-200 rounded-box grid p-5" v-if="moveStore.activeTab === 1">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
         <Move v-for="move in moveStore.movies" :key="move.id" :move="move"/>
