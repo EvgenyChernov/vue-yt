@@ -53,26 +53,20 @@
       </div>
     </div>
     <div class="">
-      <div class="card card-compact bg-base-100 w-96 shadow-xl">
-        <figure>
-          <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes" />
-        </figure>
-        <div class="card-body">
-          <h2 class="card-title">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
-      </div>
-      {{ moveStore.movies }}
+      <button :class="['btn', {'btn-success' : moveStore.activeTab === 1}]">Favorite</button>
+      <button :class="['btn', {'btn-success' : moveStore.activeTab !== 1}]">Search</button>
     </div>
+    <div class="bg-gray-200 rounded-box grid p-5" v-if="moveStore.activeTab === 1">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+        <Move v-for="move in moveStore.movies" :key="move.id" :move="move"/>
+      </div>
+    </div>
+    <div class="" v-else>Search</div>
   </div>
 </template>
 
 <script setup>
+import Move from '@/components/MoveComponent.vue'
 import { useMoveStore } from '@/stores/MoveStore'
 
 const moveStore = useMoveStore()

@@ -21,6 +21,7 @@ export const useMoveStore = defineStore('moveStore', {
         release_date: '2022-03-01',
         isWatched: true
       }
-    ]
+    ],
+    activeTab: 1
   })
 })
