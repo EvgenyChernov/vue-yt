@@ -4,15 +4,12 @@
     <div v-for="mail in mails" :key="mail.id" class="bg-gray-200 rounded-md shadow-sm">
       <router-link :to="'/mail/' + mail.id">{{ mail.text }}</router-link>
     </div>
-    <mail-item-page :mail-id="$route.params.mailId"></mail-item-page>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import MailItemPage from '@/views/MailItemPage.vue'
-
 export default {
-  components: { MailItemPage },
   data () {
     return {
       mails: [
