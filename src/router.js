@@ -2,9 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginPage from '@/views/LoginPage.vue'
 import ForgetPage from '@/views/ForgetPage.vue'
 import DashboardPage from '@/views/DashboardPage.vue'
-import MailPage from '@/views/MailPage.vue'
+// import MailPage from '@/views/MailPage.vue'
 import MailItemPage from '@/views/MailItemPage.vue'
 import NotFoundPage from '@/views/NotFoundPage.vue'
+
+const MailPage = () => import('@/views/MailPage.vue')
 
 const router = createRouter({
   history: createWebHistory(),
