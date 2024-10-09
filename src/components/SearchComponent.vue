@@ -21,7 +21,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
 <!--      <div class="" v-for="move in searchStore.movies" :key="move.id">{{move}}</div>-->
       <move-component v-for="move in searchStore.movies" :move="move" :key="move.id" :is-search="true"></move-component>
-      <app-loader v-if="searchStore.loading" ></app-loader>
+      <app-loader v-if="searchStore.loader" ></app-loader>
     </div>
   </div>
 </template>
