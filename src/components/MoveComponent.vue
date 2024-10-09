@@ -9,12 +9,15 @@
       <div class="card-body">
         <h2 class="card-title">{{ move.original_title }} ({{ move.release_date }})</h2>
         <p>{{ move.overview }}</p>
-        <div class="card-actions justify-end">
+        <div v-if="!isSearch" class="card-actions justify-end">
           <button class="btn btn-primary" @click="moveStore.toggleWatched(move.id)">
             <span v-if="!move.isWatched" >Просмотрено</span>
             <span v-else>Убрать из просмотренного</span>
           </button>
           <button class="btn btn-error" @click="moveStore.deleteMovie(move.id)">Удалить</button>
+        </div>
+        <div v-if="isSearch" class="card-actions justify-end">
+          <button class="btn btn-error">Добавить</button>
         </div>
       </div>
     </div>
@@ -32,6 +35,11 @@ const props = defineProps({
     required: true,
     default: () => {
     }
+  },
+  isSearch: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 </script>

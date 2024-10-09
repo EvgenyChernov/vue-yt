@@ -69,12 +69,14 @@
       </div>
     </div>
     <div class="bg-white" v-else>Search</div>
+    <search-component></search-component>
   </div>
 </template>
 
 <script setup>
 import Move from '@/components/MoveComponent.vue'
 import { useMoveStore } from '@/stores/MoveStore'
+import SearchComponent from '@/components/SearchComponent.vue'
 
 const moveStore = useMoveStore()
 const setTab = (id) => {

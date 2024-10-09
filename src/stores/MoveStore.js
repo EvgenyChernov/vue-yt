@@ -22,7 +22,7 @@ export const useMoveStore = defineStore('moveStore', {
         isWatched: true
       }
     ],
-    activeTab: 1
+    activeTab: 2
   }),
   getters: {
     watchedMovies () {
