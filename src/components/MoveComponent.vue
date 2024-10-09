@@ -17,7 +17,7 @@
           <button class="btn btn-error" @click="moveStore.deleteMovie(move.id)">Удалить</button>
         </div>
         <div v-if="isSearch" class="card-actions justify-end">
-          <button class="btn btn-error">Добавить</button>
+          <button @click="searchStore.addToUserMovies(move)" class="btn btn-error">Добавить</button>
         </div>
       </div>
     </div>
@@ -26,8 +26,10 @@
 
 <script setup>
 import { useMoveStore } from '@/stores/MoveStore'
-const moveStore = useMoveStore()
+import { useSearchStore } from '@/stores/SearchStore'
 
+const moveStore = useMoveStore()
+const searchStore = useSearchStore()
 // eslint-disable-next-line no-unused-vars,no-undef
 const props = defineProps({
   move: {
