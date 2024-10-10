@@ -1,16 +1,32 @@
 <template>
   <div>
     Страница пользователей
-    <div v-for="user in userStore.users" :key="user.name" class="">
-      {{user.name}}
-    </div>
+    <p style="color: red" v-if="error">{{error}}</p>
+    <Suspense v-else>
+      <template #default>
+        <this-user-list></this-user-list>
+      </template>
+      <template #fallback>
+        <p>Загрузка</p>
+      </template>
+    </Suspense>
+    <button @click="userStore.getUsers" class="btn btn-success">Загрузить пользователей</button>
   </div>
 </template>
 
 <script setup lang="ts">
+import ThisUserList from "@/components/ThisUserList.vue";
 import {useUserStore} from "@/store";
-const userStore = useUserStore();
+import {onErrorCaptured, ref} from "vue";
 
+const error = ref<null | unknown>(null)
+ onErrorCaptured(e => {
+   error.value = e;
+   return true
+ })
+
+
+const userStore = useUserStore()
 </script>
 
 <style scoped>

@@ -11,7 +11,6 @@ import {useRouter} from "vue-router";
 
 const router = useRouter()
 const text = 'Some text'
-
 const navigate = () => router.push({name: 'users'})
 
 
