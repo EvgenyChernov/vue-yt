@@ -1,6 +1,6 @@
 <template>
-  <div>
-    Home
+  <div class="container ">
+    Auth
   </div>
 </template>
 

@@ -1,11 +1,12 @@
 <template>
+  <the-navbar></the-navbar>
   <div>
-    Home
   </div>
 </template>
 
 <script setup lang="ts">
 
+import TheNavbar from "@/components/TheNavbar.vue";
 </script>
 
 <style scoped>
