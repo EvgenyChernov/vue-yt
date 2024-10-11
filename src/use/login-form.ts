@@ -1,14 +1,16 @@
 // login-form.ts
-import { useField, useForm } from "vee-validate";
+import {useField, useForm} from "vee-validate";
 import * as yup from "yup";
-import { computed, watch } from "vue";
+import {computed, watch} from "vue";
+import {useAuthStore} from "@/store";
 
 export function useLoginForm() {
-  const { handleSubmit, isSubmitting, submitCount } = useForm();
+  const authStore = useAuthStore();
+  const {handleSubmit, isSubmitting, submitCount} = useForm();
   const MIN_LENGTH = 6;
 
   // Поле email
-  const { value: email, errorMessage: eError, handleBlur: eBlur } = useField(
+  const {value: email, errorMessage: eError, handleBlur: eBlur} = useField(
     "email",
     yup
       .string()
@@ -25,13 +27,13 @@ export function useLoginForm() {
   });
 
   // Поле пароля
-  const { value: password, errorMessage: pError, handleBlur: pBlur } = useField(
+  const {value: password, errorMessage: pError, handleBlur: pBlur} = useField(
     "password",
     yup.string().trim().min(MIN_LENGTH, `Пароль не может быть меньше ${MIN_LENGTH} символов`)
   );
 
-  const onSubmit = handleSubmit((values) => {
-    console.log(values);
+  const onSubmit = handleSubmit(async (values) => {
+    await authStore.login(values.email, values.password);
   });
 
   return {
