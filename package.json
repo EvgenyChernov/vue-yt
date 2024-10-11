@@ -11,8 +11,10 @@
     "core-js": "^3.8.3",
     "pinia": "^2.2.4",
     "postcss": "^8",
+    "vee-validate": "^4.13.2",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",
