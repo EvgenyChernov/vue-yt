@@ -1,6 +1,6 @@
 <template>
-  <div class="container ">
-    Auth
+  <div class="">
+    <router-view/>
   </div>
 </template>
 

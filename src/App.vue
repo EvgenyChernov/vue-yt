@@ -10,7 +10,7 @@
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import MainLayout from '@/layout/MainLayout.vue';
-import AuthLayout from '@/layout/AuthLayout.vue'; // предположим, что у вас есть такой компонент
+import AuthLayout from '@/layout/AuthLayout.vue';
 
 // Получаем текущий роут
 const route = useRoute();
