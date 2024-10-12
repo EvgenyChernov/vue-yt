@@ -21,6 +21,7 @@ export const useAuthStore = defineStore('authStore', () => {
         if (e instanceof Error && 'response' in e) {
           console.log(error((e as any).response.data.error.message));
         }
+        throw new Error()
       }
 
       // console.log('вызов логин', email, password, process.env.VUE_APP_FB_KEY);

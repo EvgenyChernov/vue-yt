@@ -4,6 +4,7 @@ import * as yup from "yup";
 import {computed, watch} from "vue";
 import {useAuthStore} from "@/store";
 import {useRouter} from "vue-router";
+import {error} from "@/utils/error";
 
 export function useLoginForm() {
   const authStore = useAuthStore();
@@ -35,8 +36,11 @@ export function useLoginForm() {
   );
 
   const onSubmit = handleSubmit(async (values) => {
-    await authStore.login(values.email, values.password);
-    await router.push({name: 'home'});
+    try {
+      await authStore.login(values.email, values.password);
+      await router.push({name: 'home'});
+    } catch (error) {
+    }
   });
 
   return {
