@@ -1,7 +1,7 @@
 <template>
   <dialog @click.stop="store.closeModal()" :class="['modal', {'modal-open': store.isShowModal}]">
     <div @click.stop class="modal-box">
-      <h3 class="text-lg font-bold">{{ title }}</h3>
+      <h3 class="text-lg font-bold text-center">{{ title }}</h3>
       <p class="py-4">
         <slot></slot>
       </p>

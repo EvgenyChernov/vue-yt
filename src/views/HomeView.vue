@@ -6,7 +6,7 @@
     <request-table :requests="[]"/>
     <teleport to="body">
       <app-modal title="Заголовок модального окна">
-        <request-modal-body/>
+        <request-modal-body @created="store.closeModal()" />
       </app-modal>
     </teleport>
   </app-page>
