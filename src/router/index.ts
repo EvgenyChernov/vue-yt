@@ -1,5 +1,6 @@
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 import HomeView from "@/views/HomeView.vue";
+import {useAuthStore} from "@/store";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -7,7 +8,8 @@ const routes: Array<RouteRecordRaw> = [
     name: 'home',
     component: HomeView,
     meta: {
-      layout: 'main'
+      layout: 'main',
+      auth: true
     }
   },
   {
@@ -15,7 +17,8 @@ const routes: Array<RouteRecordRaw> = [
     name: 'help',
     component: () => import('@/views/HelpView.vue'),
     meta: {
-      layout: 'main'
+      layout: 'main',
+      auth: true
     }
   },
   {
@@ -23,7 +26,8 @@ const routes: Array<RouteRecordRaw> = [
     name: 'auth',
     component: () => import('@/views/AuthView.vue'),
     meta: {
-      layout: 'auth'
+      layout: 'auth',
+      auth: false
     }
   }
 ]
@@ -33,6 +37,19 @@ const router = createRouter({
   routes,
   linkActiveClass: 'active',
   linkExactActiveClass: 'exact-active',
+})
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+  const requireAuth = to.meta.auth
+  if (requireAuth && authStore.isAuthenticated()) {
+    next()
+  } else if (requireAuth && !authStore.isAuthenticated()) {
+    next('/auth?message=auth')
+  } else {
+    next()
+  }
+
 })
 
 export default router

@@ -3,9 +3,11 @@ import {useField, useForm} from "vee-validate";
 import * as yup from "yup";
 import {computed, watch} from "vue";
 import {useAuthStore} from "@/store";
+import {useRouter} from "vue-router";
 
 export function useLoginForm() {
   const authStore = useAuthStore();
+  const router = useRouter();
   const {handleSubmit, isSubmitting, submitCount} = useForm();
   const MIN_LENGTH = 6;
 
@@ -34,6 +36,7 @@ export function useLoginForm() {
 
   const onSubmit = handleSubmit(async (values) => {
     await authStore.login(values.email, values.password);
+    await router.push({name: 'home'});
   });
 
   return {

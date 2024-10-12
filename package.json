@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10",
+    "axios": "^1.7.7",
     "core-js": "^3.8.3",
     "pinia": "^2.2.4",
     "postcss": "^8",
