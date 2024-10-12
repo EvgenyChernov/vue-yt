@@ -10,6 +10,7 @@ export {
 
 export const useStore = defineStore('store', () => {
   const message: Ref<any> = ref(null)
+  const isShowModal = ref(false)
 
   const setMessage = (mes: String) => {
     message.value = mes;
@@ -17,9 +18,19 @@ export const useStore = defineStore('store', () => {
       message.value = null;
     }, 5000)
   }
+  const showModal = () => {
+    isShowModal.value = true
+  }
+  const closeModal = () => {
+    isShowModal.value = false
+  }
+
 
   return {
     message,
-    setMessage
+    isShowModal,
+    setMessage,
+    showModal,
+    closeModal
   }
 });

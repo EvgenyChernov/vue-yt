@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="navbar-center">
-      <a class="btn btn-ghost text-xl">Заявки</a>
+      <router-link :to="{name:'home'}" class="btn btn-ghost text-xl">Заявки</router-link>
       <a class="btn btn-ghost text-xl">Помощь</a>
       <a class="btn btn-ghost text-xl">Сообщения</a>
       <a @click="logOut" class="btn btn-ghost text-xl">Выход</a>

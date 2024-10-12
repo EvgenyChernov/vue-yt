@@ -35,8 +35,8 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
-  linkActiveClass: 'active',
-  linkExactActiveClass: 'exact-active',
+  linkActiveClass: 'btn-active',
+  linkExactActiveClass: 'btn-active',
 })
 
 router.beforeEach((to, from, next) => {
