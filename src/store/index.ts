@@ -1,11 +1,25 @@
-import {createPinia} from "pinia";
+import {defineStore} from "pinia";
 import {useUserStore} from "@/store/userStore";
 import {useAuthStore} from "@/store/authStore";
+import {ref, Ref} from "vue";
 
-const pinia = createPinia();
 export {
   useUserStore,
   useAuthStore
 };
 
-export default pinia;
+export const useStore = defineStore('store', () => {
+  const message: Ref<any> = ref(null)
+
+  const setMessage = (mes: String) => {
+    message.value = mes;
+    setTimeout(() => {
+      message.value = null;
+    }, 5000)
+  }
+
+  return {
+    message,
+    setMessage
+  }
+});

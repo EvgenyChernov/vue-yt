@@ -2,6 +2,7 @@ import {defineStore} from "pinia";
 import {Ref, ref} from "vue";
 import axios, {Axios} from "axios";
 import {error} from "@/utils/error";
+import {useStore} from "@/store/index";
 
 export const useAuthStore = defineStore('authStore', () => {
     const TOKEN_KEY = "jwt-token"
@@ -10,16 +11,16 @@ export const useAuthStore = defineStore('authStore', () => {
     const login = async (email: string, password: string) => {
       try {
         const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_FB_KEY}`
-        console.log(url)
         const {data} = await axios.post(url, {
           email,
           password,
           returnSecureToken: true
         })
         setToken(data.idToken)
+        useStore().message = null
       } catch (e) {
         if (e instanceof Error && 'response' in e) {
-          console.log(error((e as any).response.data.error.message));
+          useStore().setMessage(error((e as any).response.data.error.message))
         }
         throw new Error()
       }
@@ -38,8 +39,7 @@ export const useAuthStore = defineStore('authStore', () => {
     }
 
     const isAuthenticated = () => {
-      console.log('isAuthenticated')
-      return !!token
+      return !!token.value
     }
 
     return {
