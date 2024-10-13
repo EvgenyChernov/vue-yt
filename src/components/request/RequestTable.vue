@@ -45,7 +45,7 @@
           </td>
           <td>{{ currency(item.amount) }}</td>
           <th>
-            <router-link :to="{name: 'request', params: {id: item.id, }}" class="btn btn-ghost btn-xs">details
+            <router-link :to="{name: 'request', params: { id: index }}" class="btn btn-ghost btn-xs">подробно
             </router-link>
           </th>
         </tr>

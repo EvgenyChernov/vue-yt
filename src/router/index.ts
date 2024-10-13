@@ -31,12 +31,12 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: '/request',
+    path: '/request/:id',
     name: 'request',
-    component: () => import('@/views/AuthView.vue'),
+    component: () => import('@/views/RequestView.vue'),
     meta: {
-      layout: 'auth',
-      auth: false
+      layout: 'main',
+      auth: true
     }
   }
 ]

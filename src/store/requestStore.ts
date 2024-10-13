@@ -15,7 +15,7 @@ export const useRequestStore = defineStore('requestStore', () => {
     requests.value = req;
   }
 
-  const create = async (sentData : Object | any) => {
+  const create = async (sentData: Object | any) => {
     try {
       const token = authStore.token
       const {data} = await requestAxios.post(`/requests.json?auth=${token}`, sentData)
@@ -29,16 +29,24 @@ export const useRequestStore = defineStore('requestStore', () => {
 
   const getRequests = async () => {
     try {
-    const token = authStore.token
-    const {data} = await requestAxios.get(`/requests.json?auth=${token}`)
+      const token = authStore.token
+      const {data} = await requestAxios.get(`/requests.json?auth=${token}`)
       requests.value = data
+    } catch (e: Object | any) {
+      store.setMessage('Получена ошибка запроса' + String(e.message))
+    }
+  }
+  const getRequestById = async (id: String) => {
+    try {
+      const token = authStore.token
+      const {data} = await requestAxios.get(`/requests/${id}.json?auth=${token}`)
+      return data
     } catch (e: Object | any) {
       store.setMessage('Получена ошибка запроса' + String(e.message))
     }
   }
 
   const filterRequests = (filterFio: string, filterStatus: string) => {
-    console.log('запуск', filterFio, filterStatus);
     return Object.fromEntries(
       Object.entries(requests.value).filter(([key, value]: [string, any]) => {
         const matchesFio = filterFio ? value.fio.toLowerCase().includes(filterFio.toLowerCase()) : true; // Используем includes для частичного совпадения
@@ -53,7 +61,8 @@ export const useRequestStore = defineStore('requestStore', () => {
     setRequests,
     create,
     getRequests,
-    filterRequests
+    filterRequests,
+    getRequestById
   }
 })
 

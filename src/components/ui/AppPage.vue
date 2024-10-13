@@ -1,8 +1,15 @@
 <template>
   <div>
+    <div class="breadcrumbs text-sm" v-if="back">
+      <ul>
+        <li>
+          <router-link :to="{ name:'home' }">Главная</router-link>
+        </li>
+      </ul>
+    </div>
     <div class="flex justify-between">
-    <h3>{{ title }}</h3>
-    <slot name="header"/>
+      <h3>{{ title }}</h3>
+      <slot name="header"/>
     </div>
     <div class="">
       <slot/>
@@ -18,6 +25,10 @@ const props = defineProps({
     type: String,
     required: false,
     default: ""
+  },
+  back: {
+    type: Boolean,
+    default: false
   }
 })
 
