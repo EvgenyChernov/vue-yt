@@ -44,13 +44,16 @@
 
 <script setup lang="ts">
 import {useRequestForm} from "@/use/request-form";
+import {useRequestStore} from "@/store";
 
+
+const requestStore = useRequestStore()
 const emit = defineEmits([
   'created',
 ])
 
 const submit = async (values: Record<string, any>) => {
-  console.log(values)
+  await requestStore.create(values)
   emit("created")
 }
 

@@ -1,16 +1,18 @@
 <template>
-  <div class="container mx-auto ">
+  <div class="container mx-auto relative">
+    <AppMessage/>
     <component :is="layoutComponent">
-      <router-view />
+      <router-view/>
     </component>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import {computed} from 'vue';
+import {useRoute} from 'vue-router';
 import MainLayout from '@/layout/MainLayout.vue';
 import AuthLayout from '@/layout/AuthLayout.vue';
+import AppMessage from "@/components/ui/AppMessage.vue";
 
 // Получаем текущий роут
 const route = useRoute();
