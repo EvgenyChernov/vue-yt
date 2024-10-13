@@ -9,6 +9,8 @@ export const useRequestStore = defineStore('requestStore', () => {
   const requests: Ref<any> = ref([])
   const authStore = useAuthStore();
   const store = useStore();
+  const filterFio: Ref<string | null> = ref(null); // Для хранения ФИО фильтра
+  const filterStatus: Ref<string | null> = ref(null); // Для хранения статуса фильтра
   const setRequests = (req: any[] | any) => {
     requests.value = req;
   }
@@ -35,11 +37,23 @@ export const useRequestStore = defineStore('requestStore', () => {
     }
   }
 
+  const filterRequests = (filterFio: string, filterStatus: string) => {
+    console.log('запуск', filterFio, filterStatus);
+    return Object.fromEntries(
+      Object.entries(requests.value).filter(([key, value]: [string, any]) => {
+        const matchesFio = filterFio ? value.fio.toLowerCase().includes(filterFio.toLowerCase()) : true; // Используем includes для частичного совпадения
+        const matchesStatus = filterStatus ? value.status === filterStatus : true;
+        return matchesFio && matchesStatus; // Возвращает true только если оба условия выполняются
+      })
+    );
+  };
+
   return {
     requests,
     setRequests,
     create,
-    getRequests
+    getRequests,
+    filterRequests
   }
 })
 

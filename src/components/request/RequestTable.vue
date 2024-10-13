@@ -35,17 +35,18 @@
                 </div>
               </div>
               <div>
-                <div class="font-bold">{{item.fio}}</div>
-                <div class="text-sm opacity-50">{{item.phone}}</div>
+                <div class="font-bold">{{ item.fio }}</div>
+                <div class="text-sm opacity-50">{{ item.phone }}</div>
               </div>
             </div>
           </td>
           <td>
-            <span class="badge badge-ghost badge-sm">{{item.status}}</span>
+            <app-status :status="item.status"/>
           </td>
-          <td>{{item.amount}}</td>
+          <td>{{ currency(item.amount) }}</td>
           <th>
-            <router-link :to="{name: 'request', params: {id: item.id, }}" class="btn btn-ghost btn-xs">details</router-link>
+            <router-link :to="{name: 'request', params: {id: item.id, }}" class="btn btn-ghost btn-xs">details
+            </router-link>
           </th>
         </tr>
         <!-- row 2 -->
@@ -58,6 +59,8 @@
 <script setup lang="ts">
 import {defineProps} from "vue"
 import AppModal from "@/components/ui/AppModal.vue";
+import {currency} from "@/utils/currency";
+import AppStatus from "@/components/ui/AppStatus.vue";
 
 const props = defineProps({
   requests: {
