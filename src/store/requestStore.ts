@@ -17,7 +17,8 @@ export const useRequestStore = defineStore('requestStore', () => {
     try {
       const token = authStore.token
       const {data} = await requestAxios.post(`/requests.json?auth=${token}`, sentData)
-        // requests.value = requests.value[...data]
+      console.log(requests.value, data)
+      requests.value[data.name] = sentData
       store.setMessage('Заявка успешно создана')
     } catch (e: Object | any) {
       store.setMessage('Получена ошибка запроса' + String(e.message))

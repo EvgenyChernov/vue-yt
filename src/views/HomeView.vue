@@ -1,4 +1,5 @@
 <template>
+  <app-loader v-if="store.loading"/>
   <app-page title="Home">
     <template #header>
       <button @click="store.showModal()" class="btn">кнопка</button>
@@ -20,12 +21,15 @@ import AppModal from "@/components/ui/AppModal.vue";
 import {useRequestStore, useStore} from "@/store";
 import RequestModalBody from "@/components/request/RequestModalBody.vue";
 import {onMounted} from "vue";
+import AppLoader from "@/components/ui/AppLoader.vue";
 
 const store = useStore();
 const requestStore = useRequestStore()
 
-onMounted(()=> {
-  requestStore.getRequests()
+onMounted(async ()=> {
+  store.loading = true
+  await requestStore.getRequests()
+  store.loading = false
 })
 
 </script>
