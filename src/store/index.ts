@@ -14,6 +14,7 @@ export const useStore = defineStore('store', () => {
   const message: Ref<any> = ref(null)
   const isShowModal = ref(false)
   const loading: Ref<any> = ref(false)
+  const sidebar: Ref<any> = ref(false)
 
   const setMessage = (mes: String) => {
     message.value = mes;
@@ -35,6 +36,7 @@ export const useStore = defineStore('store', () => {
     setMessage,
     showModal,
     closeModal,
-    loading
+    loading,
+    sidebar,
   }
 });

@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto relative">
+  <div class="container mx-auto">
     <AppMessage/>
     <component :is="layoutComponent">
       <router-view/>

@@ -1,5 +1,5 @@
 <template>
-  <div role="alert" :class="['alert absolute transition-all duration-250 ease-in-out z-50', store.message ? 'top-4' : 'top-[-4rem]']">
+  <div role="alert" :class="['container mx-auto alert absolute transition-all duration-250 ease-in-out z-50', store.message ? 'top-4' : 'top-[-4rem]']">
     <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
