@@ -3,6 +3,7 @@ import {Ref, ref} from "vue";
 import requestAxios from "@/axios/request";
 import {useAuthStore} from "@/store/authStore";
 import {useStore} from "@/store/index";
+import Request from "@/axios/request";
 
 export const useRequestStore = defineStore('requestStore', () => {
   const requests: Ref<any> = ref([])
@@ -16,8 +17,18 @@ export const useRequestStore = defineStore('requestStore', () => {
     try {
       const token = authStore.token
       const {data} = await requestAxios.post(`/requests.json?auth=${token}`, sentData)
-      console.log(data)
+        // requests.value = requests.value[...data]
       store.setMessage('Заявка успешно создана')
+    } catch (e: Object | any) {
+      store.setMessage('Получена ошибка запроса' + String(e.message))
+    }
+  }
+
+  const getRequests = async () => {
+    try {
+    const token = authStore.token
+    const {data} = await requestAxios.get(`/requests.json?auth=${token}`)
+      requests.value = data
     } catch (e: Object | any) {
       store.setMessage('Получена ошибка запроса' + String(e.message))
     }
@@ -26,7 +37,8 @@ export const useRequestStore = defineStore('requestStore', () => {
   return {
     requests,
     setRequests,
-    create
+    create,
+    getRequests
   }
 })
 

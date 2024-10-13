@@ -29,6 +29,15 @@ const routes: Array<RouteRecordRaw> = [
       layout: 'auth',
       auth: false
     }
+  },
+  {
+    path: '/request',
+    name: 'request',
+    component: () => import('@/views/AuthView.vue'),
+    meta: {
+      layout: 'auth',
+      auth: false
+    }
   }
 ]
 

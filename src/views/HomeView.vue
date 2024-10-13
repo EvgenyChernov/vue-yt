@@ -3,7 +3,7 @@
     <template #header>
       <button @click="store.showModal()" class="btn">кнопка</button>
     </template>
-    <request-table :requests="[]"/>
+    <request-table :requests="requestStore.requests"/>
     <teleport to="body">
       <app-modal title="Заголовок модального окна">
         <request-modal-body @created="store.closeModal()" />
@@ -17,10 +17,17 @@
 import AppPage from "@/components/ui/AppPage.vue";
 import RequestTable from "@/components/request/RequestTable.vue";
 import AppModal from "@/components/ui/AppModal.vue";
-import {useStore} from "@/store";
+import {useRequestStore, useStore} from "@/store";
 import RequestModalBody from "@/components/request/RequestModalBody.vue";
+import {onMounted} from "vue";
 
 const store = useStore();
+const requestStore = useRequestStore()
+
+onMounted(()=> {
+  requestStore.getRequests()
+})
+
 </script>
 
 <style scoped>
