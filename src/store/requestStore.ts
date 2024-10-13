@@ -4,6 +4,7 @@ import requestAxios from "@/axios/request";
 import {useAuthStore} from "@/store/authStore";
 import {useStore} from "@/store/index";
 import Request from "@/axios/request";
+import router from "@/router";
 
 export const useRequestStore = defineStore('requestStore', () => {
   const requests: Ref<any> = ref([])
@@ -45,6 +46,25 @@ export const useRequestStore = defineStore('requestStore', () => {
       store.setMessage('Получена ошибка запроса' + String(e.message))
     }
   }
+  const removeRequest = async (id: String) => {
+    try {
+      const token = authStore.token
+      const {data} = await requestAxios.delete(`/requests/${id}.json?auth=${token}`)
+      store.setMessage('Заявка успешно удалена')
+
+    } catch (e: Object | any) {
+      store.setMessage('Получена ошибка запроса' + String(e.message))
+    }
+  }
+  const updateRequest = async (request: Object | any) => {
+    try {
+      const token = authStore.token
+      const {data} = await requestAxios.put(`/requests/${request.id}.json?auth=${token}`, request)
+      store.setMessage('Заявка успешно обновлена')
+    } catch (e: Object | any) {
+      store.setMessage('Получена ошибка запроса' + String(e.message))
+    }
+  }
 
   const filterRequests = (filterFio: string, filterStatus: string) => {
     return Object.fromEntries(
@@ -62,7 +82,9 @@ export const useRequestStore = defineStore('requestStore', () => {
     create,
     getRequests,
     filterRequests,
-    getRequestById
+    getRequestById,
+    removeRequest,
+    updateRequest,
   }
 })
 
